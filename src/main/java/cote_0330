@@ -1,0 +1,171 @@
+package StackList;
+import java.util.*;
+
+public class cote0330 {
+    public static void main(String[] args) {
+        Solution6 solution6 = new Solution6();
+        solution6.solution6("Zbcdefg");
+    }
+}
+
+
+
+//나누어 떨어지는 숫자 배열
+
+class Solution1 {
+    public int[] solution(int []arr) {
+        int[] answer = {};
+        Stack<Integer> stack = new Stack<>();
+        stack.push(arr[0]);
+        for(int i =1; i < arr.length; i++){
+            if(stack.peek() != arr[i] ){
+                stack.push(arr[i]);
+            }
+        }
+        answer = stack.stream().mapToInt(Integer::intValue).toArray();
+        answer = new int[stack.size()];
+        for(int i = 0; i < stack.size(); i++){
+            answer[i] = stack.get(i);
+        }
+        return answer;
+    }
+}
+//스택/큐
+//같은 숫자는 싫어
+
+class Solution2 {
+    public int[] solution(int[] arr, int divisor) {
+        int[] answer = {};
+        List<Integer> list = new ArrayList<>();
+        for(int i =0; i < arr.length; i++){
+            if(arr[i] % divisor == 0) list.add(arr[i]);
+        }
+        answer = new int[list.size()];
+        for(int i = 0; i < list.size(); i++){
+            answer[i] = list.get(i);
+        }
+        Arrays.sort(answer);//arrays라는 객체 생성한거라 s
+        if(list.isEmpty()){
+            answer = new int[]{-1};
+        }
+        return answer;
+    }
+}
+//두 정수 사이의 합
+class Solution3 {
+    public long solution(int a, int b) {
+        long answer = 0;
+        if(a == b)return a;
+        for(int i = Math.min(a, b); i < Math.max(a, b)+1; i++ ) answer += i;return answer;
+    }
+}
+
+//문자열 내 마음대로 정렬하기
+class Solution4 {
+    public String[] solution(String[] strings, int n) {
+        String[] answer = new String[strings.length];
+        //배열일땐 괄호있고 순수 스트링일때는 괄로가 없다
+        ArrayList<String> list = new ArrayList<String>();
+        //list.add(strings[0]);
+        // for(int i = 0; i< strings.length; i++){
+        //if(list[i].charAt(n) > strings[i+1].charAt(n)) list.add(strings[i+1]);
+        // else list.add(i, string[i+1]);
+        // }
+        for(int i =0; i < strings.length; i++){
+            list.add(strings[i].charAt(n) + strings[i]);
+        }
+        Collections.sort(list);
+        for(int i =0; i < strings.length; i++){
+            answer[i] = list.get(i).substring(1);
+            answer[i] = list.get(i).split(",")[1];
+        }
+
+        return answer;
+    }
+}
+
+class Solution5 {
+    boolean solution(String s) {
+        int countP =0;
+        int countY =0;
+        s = s.toLowerCase();
+        // [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
+        for(int i =0; i< s.length(); i++){
+            if(s.charAt(i) == 'p')countP +=1;
+            if(s.charAt(i) =='y')countY +=1;
+        }
+        //equals는 문자열 일때만 문자(숫자) "=="
+        return countP == countY? true: false;
+    }
+}
+
+class Solution6 {
+    public String solution6(String s) {
+        String answer = "";
+        char[] reverce = new char[s.length()];
+        for(int i =0; i < s.length(); i++){
+            reverce[i] = s.charAt(i);
+
+        }
+        System.out.println(reverce);
+        Arrays.sort(reverce);
+        for(int i = s.length(); i <0; i--){
+            answer += reverce[i];
+        }
+        return answer;
+    }
+}
+
+class Solution7 {
+    public String solution7(String s) {
+
+        //1-1
+
+        String answer = "";
+        char[] arr = new char[s.length()];
+        for(int i =0; i < s.length(); i++){
+            arr[i] = s.charAt(i);
+        }
+
+        
+        //2-2
+        ArrayList<String> list = new ArrayList<>(Arrays.asList(s.split(" ")));
+        Collections.sort(list.Collections.reverseOrder());
+        answer = String.join("",list);//list에서 한 방향씩 스트링 형태로 조인(결합시킨다) ""->각 문자의 사이는 붙여서 넣는다
+
+
+
+
+        return answer;
+    }
+}
+
+class Solution7_2 {
+    public String solution(String s) {
+        String answer = "";
+//1-2
+        char[] arr = s.toCharArray();
+        Arrays.sort(arr);//arrays s까먹지 말기
+        for(int i =arr.length -1; i >=0; i--){
+            answer += arr[i];
+        }
+        return answer;
+    }
+}
+
+class Solution7_3 {
+    public String solution(String s) {
+        String answer = "";
+//2-1
+        Arrays<String> list = new ArrayList<String>();
+        for(int i = 0; i < s.length(); i++){
+            list.add(String.valueOf(s.charAt(i)));
+        }
+        Collections.sort(list.Collections.reverseOrder());
+        for(int i =0; i <list.size(); i++){
+            answer += list.get(i);
+        }
+
+        return answer;
+    }
+}
